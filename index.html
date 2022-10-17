@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000" />
+
+  <title>iNdigital Space</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="/style.css" rel="stylesheet" />
+  <!-- <link href="/flipdown/dist/flipdown.min.css" rel="stylesheet" /> -->
+  <link rel="icon" href="/cropped-iN_favicon-32x32.png" sizes="32x32" />
+  <!-- <script type="text/javascript" src="/flipdown/dist/flipdown.min.js"></script> -->
+</head>
+<body>
+  <header>
+    <button class="stop-animation stop-animation-static">Pause Background</button>
+    <div class="main-container">
+      <nav>
+        <a href="/" class="logo">
+          <img src="/iN_logo_Pantone_RedChevReverseTransparent.png" alt="imagineNATIVE - Home" />
+        </a>
+        <button class="stop-animation stop-animation-header">Pause Background</button>
+      </nav>
+    </div>
+  </header>
+
+  <video playsinline autoplay muted loop poster="/assets/AuroraBackground.jpg" class="bgvideo" id="bgvideo">
+    <source src="/assets/AuroraBackground.mp4" type="video/mp4" />
+  </video>
+
+  <main style="display: flex;align-items: center;justify-content: center;padding:0">
+    <div class="splash-zone text-center">
+      <h1 style="margin-bottom:20px"><em>WELCOME TO THE INDIGITAL SPACE</em></h1>
+      <div style="margin-top:40px; margin-left:150px; margin-right: 150px; margin-bottom: 40px; justify-content: left;">
+      <p>We at imagineNATIVE acknowledge that this land located on present-day Tkaronto
+(Toronto) is the traditional territory of the Anishnaabe, Haudenosaunee, Huron-Wendat and the Mississaugas of the Credit. <p>
+ 
+<p>We acknowledge  the Dish With One Spoon covenant, a treaty whose spirit is one based in collective stewardship and reciprocity. We take the spirit of this covenant to the core of our operations as we bring artists and audiences from many nations across the globe together through our various initiatives and activities. </p>
+ 
+<p>Please take a moment to think of the land you currently reside upon wherever you may be and acknowledge those who went before and those yet to come.<p></div>
+</h1>
+      <h1 style="margin-top:20px"><a href="/home.html">»ENTER</a></h1>
+    </div>
+  </main>
+
+
+  <script>
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    var bgVideo = document.getElementById('bgvideo');
+    var a11yAnimationButtons = document.getElementsByClassName('stop-animation');
+
+    function changeA11yText(text) {
+      var a11yAnimationButtons = document.getElementsByClassName('stop-animation');
+      for (var i = 0; i < a11yAnimationButtons.length; i++) {
+        const element = a11yAnimationButtons[i];
+        element.innerHTML = text;
+      }
+    }
+
+    if (getCookie('pause_animations') === 'true') {
+      bgVideo.pause();
+      for (var i = 0; i < a11yAnimationButtons.length; i++) {
+        const element = a11yAnimationButtons[i];
+        changeA11yText('Resume Background');
+      }
+    }
+    for (var i = 0; i < a11yAnimationButtons.length; i++) {
+      const element = a11yAnimationButtons[i];
+      element.onclick = function(event) {
+        if (bgVideo.paused) {
+          bgVideo.play();
+          changeA11yText('Pause Background');
+          document.cookie = 'pause_animations=false;samesite=strict;max-age=31536000';
+        } else {
+          bgVideo.pause();
+          changeA11yText('Resume Background');
+          document.cookie = 'pause_animations=true;samesite=strict;max-age=31536000';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
